@@ -4,7 +4,7 @@ import numpy as np
 import torch
 from PIL import Image
 
-def convert_bbox_voc_to_coco(bbox):
+def convert_bbox_to_voc(bbox):
     x,y,w,h = bbox
     x0 = x - w/2
     y0 = y - h/2
@@ -27,7 +27,7 @@ class FaceDataset(torch.utils.data.Dataset):
         img = np.asarray(Image.open(img_path).convert("RGB"))
 
         boxes = self.annotations[idx]['bbox']
-        # boxes = [convert_bbox_voc_to_coco(x) for x in boxes]
+        boxes = [convert_bbox_to_voc(x) for x in boxes]
 
         boxes = torch.as_tensor(boxes, dtype=torch.float32)
         # there is only one class
