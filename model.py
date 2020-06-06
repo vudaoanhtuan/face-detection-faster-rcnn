@@ -7,7 +7,6 @@ from torchvision.models.detection.rpn import AnchorGenerator
 def get_model(num_classes=2):
     num_classes = 2
     model = torchvision.models.detection.fasterrcnn_resnet50_fpn(pretrained=True)
-    model = torchvision.models.detection.fas
     in_features = model.roi_heads.box_predictor.cls_score.in_features
     model.roi_heads.box_predictor = FastRCNNPredictor(in_features, num_classes)
 
